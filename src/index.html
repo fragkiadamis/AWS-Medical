@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="128x128" href="/AWS-icon.png">
+  <link type="text/css" href="./static/css/bootstrap.min.css" rel="stylesheet">
+  <title>AWS Medical</title>
+</head>
+<body>
+  <main class="container py-5">
+    <h1>AWS Medical Trasncription & Comprehension</h1>
+    <form>
+      <div class="mb-3">
+        <label for="accessId" class="form-label">Access ID</label>
+        <input type="password" class="form-control" id="accessId" required>
+      </div>
+      <div class="mb-3">
+        <label for="secretKey" class="form-label">Secret Key</label>
+        <input type="password" class="form-control" id="secretKey">
+      </div>
+      <div class="mb-3">
+        <label for="region">Region</label>
+        <select class="form-select" id="region">
+          <option value="us-east-1" selected>US East (N. Virginia)</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="transcriptionArea">Transcription</label>
+        <textarea class="form-control" placeholder="Transcription" id="transcriptionArea" style="height: 300px"></textarea>
+      </div>
+      <button id="start-rec" type="button" class="btn btn-success">Start</button>
+      <button id="stop-rec" type="button" class="btn btn-danger" disabled>Stop</button>
+      <button id="clear-text" type="button" class="btn btn-secondary">Clear Transcription</button>
+      <div class="my-3">
+        <button id="submit-button" class="btn btn-primary">Submit</button>
+      </div>
+      <div id="message"></div>
+    </form>
+    <!-- <audio id="audio-sample-1" src="/audio/sample-1.mp4" type="audio/mpeg"></audio>
+    <audio id="audio-sample-2" src="/audio/sample-2.mp4" type="audio/mpeg"></audio>
+    <audio id="audio-sample-3" src="/audio/sample-3.mp4" type="audio/mpeg"></audio>
+    <audio id="audio-sample-4" src="/audio/sample-4.mp4" type="audio/mpeg"></audio>
+    <button onclick="toggleAudio('audio-sample-1')" type="button" class="btn btn-success my-3">Play Sample 1</button>
+    <button onclick="toggleAudio('audio-sample-2')" type="button" class="btn btn-success my-3">Play Sample 2</button>
+    <button onclick="toggleAudio('audio-sample-3')" type="button" class="btn btn-success my-3">Play Sample 3</button>
+    <button onclick="toggleAudio('audio-sample-4')" type="button" class="btn btn-success my-3">Play Sample 4</button> -->
+  </main>
+  <script src="./static/js/main.js"></script>
+  <!-- <script>
+    // Play audio file samples
+    const toggleAudio = audioId => {
+        const audio = document.getElementById(audioId);
+
+        if (audio.paused)
+          audio.play();
+        else
+          audio.pause()
+    }
+  </script> -->
+</body>
+</html>
