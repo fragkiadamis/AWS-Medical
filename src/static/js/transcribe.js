@@ -12,7 +12,6 @@ const stopRec = document.getElementById('stop-rec');
 const clearText = document.getElementById('clear-text');
 const message = document.getElementById('message');
 const transcriptionText = document.getElementById('transcriptionArea');
-const submitButton = document.getElementById('submit-button');
 
 const sampleRate = 44100;
 const languageCode = 'en-US'
@@ -170,77 +169,4 @@ startRec.addEventListener('click', (e) => {
 // Clear transcription area
 clearText.addEventListener('click', function() {
     transcriptionText.value = ''
-});
-
-// Display AWS Medical Comprehension results
-const displayComprehension = results => {
-    let text = '';
-    for (const entity in results) {
-        text += `${entity}:\n`
-        text += `${results[entity].join(', ')}`
-        text += '\n\n';
-    }
-
-    // Create the necessary elements to display the detected entities
-    const main = document.querySelector('main');
-    const wrapper = document.createElement('div');
-    const comprehensionTextArea = document.createElement('textarea');
-    const comprehensionLabel = document.createElement('label');
-
-    // Create the elemnts' attributes, add classes etc...
-    wrapper.id = 'comprehensionWrapper';
-    wrapper.classList.add('.mb-3');
-
-    comprehensionLabel.for = 'comprehensionArea';
-    comprehensionLabel.innerHTML = 'Comprehended Text';
-
-    comprehensionTextArea.id = 'comprehensionArea';
-    comprehensionTextArea.classList.add('form-control');
-    comprehensionTextArea.style = 'height: 300px';
-    comprehensionTextArea.value = text;
-
-    // Add the elemnts n the DOM
-    wrapper.appendChild(comprehensionLabel);
-    wrapper.appendChild(comprehensionTextArea);
-    main.appendChild(wrapper);
-} 
-
-// POST form data
-const submitForm = () =>
-    new Promise((resolve, reject) => {
-        const data = {
-            'accessId': document.getElementById('accessId').value,
-            'accessKey': document.getElementById('secretKey').value,
-            'region': document.getElementById('region').value,
-            'text': document.getElementById('transcriptionArea').value
-        }
-
-        // Send request to the AWS API Gateway, the promise will return the response once it is fetched
-        fetch('https://jpsnztgy7e.execute-api.us-east-1.amazonaws.com/dev', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(res => res.json())
-            .then(data => resolve(data))
-            .catch(err => reject(err));
-    });
-
-// Submit the form
-submitButton.addEventListener('click', async e => {
-    e.preventDefault();
-
-    // Delete previous display of comprehension entities
-    let comprehension = document.getElementById('comprehensionWrapper');
-    if (comprehension)
-        comprehension.parentNode.removeChild(comprehension);
-
-    try {
-        const res = await submitForm();
-        displayComprehension(res);
-    } catch (error) {
-        console.log(`Error ${error}`);
-    }
 });

@@ -25,7 +25,7 @@ export const handler = async(event) => {
     }
 
     return {
-        statusCode: 200,
-        body: JSON.stringify({diseases, medication, anatomies, treatmentProcedures, protectedHealthInfo})
+        diseases, medication, anatomies,
+        treatmentProcedures, protectedHealthInfo
     };
 };

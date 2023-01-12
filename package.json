@@ -6,11 +6,10 @@
   "scripts": {
     "create-build-dir": "cd src && rm -rf build && mkdir build && cd build && mkdir static && cd static && mkdir css && mkdir js",
     "copy-files": "cp src/index.html src/build/ && cp src/error.html src/build/ && cp src/favicon.ico src/build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css src/build/static/css/",
-    "build-js": "browserify src/static/js/main.js -o src/build/static/js/main.js -d && uglifyjs src/build/static/js/main.js -o src/build/static/js/main.js -c -m",
-    "build": "npm run create-build-dir && npm run copy-files && npm run build-js",
-    "copy-bootstrap": "cp node_modules/bootstrap/dist/css/bootstrap.min.css src/static/css/",
-    "compile-js": "browserify src/lib/main.js -o src/static/js/main.js -d",
-    "dev": "npm run copy-bootstrap && npm run compile-js"
+    "browserify": "browserify src/static/js/transcribe.js -o src/build/static/js/main.js -d",
+    "concat-js": "concat -o src/build/static/js/main.js src/build/static/js/main.js src/static/js/form.js",
+    "build-js": "npm run browserify && npm run concat-js && uglifyjs src/build/static/js/main.js -o src/build/static/js/main.js -c -m",
+    "build": "npm run create-build-dir && npm run copy-files && npm run build-js"
   },
   "browserify": {
     "transform": [
@@ -48,6 +47,7 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "babelify": "^10.0.0",
+    "concat": "^1.0.3",
     "uglify-js": "^3.17.4"
   }
 }
