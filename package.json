@@ -8,7 +8,8 @@
     "copy-files": "cp src/index.html src/build/ && cp src/error.html src/build/ && cp src/favicon.ico src/build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css src/build/static/css/",
     "browserify": "browserify src/static/js/transcribe.js -o src/build/static/js/main.js -d",
     "concat-js": "concat -o src/build/static/js/main.js src/build/static/js/main.js src/static/js/form.js",
-    "build-js": "npm run browserify && npm run concat-js && uglifyjs src/build/static/js/main.js -o src/build/static/js/main.js -c -m",
+    "minimize-js": "uglifyjs src/build/static/js/main.js -o src/build/static/js/main.js -c -m",
+    "build-js": "npm run browserify && npm run concat-js && npm run minimize-js",
     "build": "npm run create-build-dir && npm run copy-files && npm run build-js"
   },
   "browserify": {

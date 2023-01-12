@@ -5,7 +5,7 @@
 3) Create a lambda function with node.js environment and attach the role.
 4) Paste the lambda code to the function
 5) Create an API (REST)
-6) Create method post / method for the API, enable CORS and deploy it
+6) Create method post / for the API, enable CORS and deploy it
 7) Paste the API endpoint as a second argument to the submitData function in form.js (line 69)
 8) npm i, in your local environment
 9) npm run build, in your local environment
