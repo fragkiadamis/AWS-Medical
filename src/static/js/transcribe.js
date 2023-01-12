@@ -184,5 +184,5 @@ startRec.addEventListener('click', (e) => {
 
 // Clear transcription area
 clearText.addEventListener('click', function() {
-    transcriptionText.value = ''
+    transcriptionText.value = '';
 });
