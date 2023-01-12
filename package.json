@@ -39,7 +39,6 @@
     "@aws-sdk/eventstream-marshaller": "^3.120.0",
     "@aws-sdk/util-utf8-node": "^3.208.0",
     "bootstrap": "^5.2.3",
-    "browserify": "^17.0.0",
     "crypto": "^1.0.1",
     "get-user-media-promise": "^1.1.4",
     "microphone-stream": "^6.0.1",
@@ -49,6 +48,7 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
     "concat": "^1.0.3",
     "uglify-js": "^3.17.4"
   }
