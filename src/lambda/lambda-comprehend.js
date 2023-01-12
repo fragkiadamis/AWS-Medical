@@ -1,4 +1,3 @@
-
 import { ComprehendMedical } from "@aws-sdk/client-comprehendmedical"
 
 export const handler = async(event) => {
