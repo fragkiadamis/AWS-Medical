@@ -20,8 +20,14 @@ let transcription = '';
 let socket = {};
 
 // Display message
-const showMessage = errorMessage =>
-    message.innerHTML = errorMessage;
+const showMessage = errorMessage => {
+    // If empty, just add the text
+    if (message.innerHTML == '')
+        return message.innerHTML = errorMessage;
+    
+    // If not empty, change line and add the text
+    message.innerHTML = `${message.innerHTML}<br/>${errorMessage}`;
+}
 
 // Clear message div
 const clearMessage = () =>
@@ -88,7 +94,7 @@ const streamAudioToWebSocket = micStream => {
     socket.binaryType = "arraybuffer";
 
     // Open socket and send audio
-    socket.onopen = function() {
+    socket.onopen = () => {
         micStream.on('data', chunk => {
             const raw = MicrophoneStream.toRaw(chunk)
             const binaryAudio = convertAudioToBinaryMessage(raw)
@@ -98,7 +104,7 @@ const streamAudioToWebSocket = micStream => {
     )};
 
     // Handle socket response
-    socket.onmessage = function (message) {
+    socket.onmessage = message => {
         // Convert the binary event stream message to JSON
         let messageWrapper = eventStreamMarshaller.unmarshall(Buffer(message.data));
         let messageBody = JSON.parse(String.fromCharCode.apply(String, messageWrapper.body));
@@ -127,6 +133,11 @@ const streamAudioToWebSocket = micStream => {
     
     // Handle socket closing
     socket.onclose = () => {
+        // Toggle buttons' disabled attribute
+        stopRec.disabled = true;
+        startRec.disabled = false;
+        // And close microphone
+        micStream.stop();
         showMessage('Socket connection stopped.')
     };
 }
@@ -136,7 +147,6 @@ startRec.addEventListener('click', (e) => {
     e.target.disabled = true;
     stopRec.disabled = false;
     clearMessage();
-
     const micStream = new MicrophoneStream();
 
     // Get input sample rate
@@ -155,10 +165,16 @@ startRec.addEventListener('click', (e) => {
     
     // On stop button click
     stopRec.addEventListener('click', (e) => {
+        // Toggle buttons' disabled attribute
         e.target.disabled = true;
         startRec.disabled = false;
+        // And close microphone
         micStream.stop();
 
+        // If socket is closing or already closed, return
+        if (socket.readyState == 2 || socket.readyState == 3)
+            return;
+        
         // Send empty buffer to initiate socket closure
         const emptyMessage = getAudioEventMessage(Buffer.from(new Buffer([])));
         const emptyBuffer = eventStreamMarshaller.marshall(emptyMessage);

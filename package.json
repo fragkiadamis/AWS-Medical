@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "create-build-dir": "cd src && rm -rf build && mkdir build && cd build && mkdir static && cd static && mkdir css && mkdir js",
-    "copy-files": "cp src/index.html src/build/ && cp src/error.html src/build/ && cp src/favicon.ico src/build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css src/build/static/css/",
+    "copy-css": "cp node_modules/bootstrap/dist/css/bootstrap.min.css src/build/static/css/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css.map src/build/static/css/",
+    "copy-files": "cp src/index.html src/build/ && cp src/error.html src/build/ && cp src/favicon.ico src/build/ && npm run copy-css",
     "browserify": "browserify src/static/js/transcribe.js -o src/build/static/js/main.js -d",
     "concat-js": "concat -o src/build/static/js/main.js src/build/static/js/main.js src/static/js/form.js",
     "minimize-js": "uglifyjs src/build/static/js/main.js -o src/build/static/js/main.js -c -m",
