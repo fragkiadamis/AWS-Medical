@@ -8,6 +8,6 @@
 7) Create method post / method for the API, enable CORS and deploy it
 8) Paste the API endpoint as a second argument to the submitData function in form.js (line 69)
 9) npm i, in your local environment
-10) npm build, in your local environment
+10) npm run build, in your local environment
 11) Upload the contents of the build directory into the bucket.
 12) Use the application with your IAM access key ID and access key secret (It is recomended to use 'us-east-1' as your region)

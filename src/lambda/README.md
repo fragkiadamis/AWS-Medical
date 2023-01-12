@@ -1,1 +1,0 @@
-This is the code that the lambda functions excute. Copy paste it on the lambda functions you created in AWS Console
